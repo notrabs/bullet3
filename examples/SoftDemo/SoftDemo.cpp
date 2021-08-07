@@ -2090,7 +2090,16 @@ void SoftDemo::initPhysics()
 
 		bool useQuantizedAabbCompression = true;
 
-		groundShape = new btBvhTriangleMeshShape(indexVertexArrays, useQuantizedAabbCompression);
+		btCollisionShape* triShape = new btBvhTriangleMeshShape(indexVertexArrays, useQuantizedAabbCompression);
+
+		btCompoundShape* compoundShape = new btCompoundShape();
+
+		btTransform childTransform;
+		childTransform.setIdentity();
+
+		compoundShape->addChildShape(childTransform, triShape);
+
+		groundShape = compoundShape;
 		groundShape->setMargin(0.5);
 	}
 
