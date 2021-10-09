@@ -84,6 +84,8 @@ public:
 
 	void buildOptimizedBvh();
 
+	void generateInternalEdgeInfo(btTriangleInfoMap* triangleInfoMap);
+
 	bool usesQuantizedAabbCompression() const
 	{
 		return m_useQuantizedAabbCompression;
