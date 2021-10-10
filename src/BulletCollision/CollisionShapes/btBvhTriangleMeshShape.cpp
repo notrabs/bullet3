@@ -354,6 +354,12 @@ void btBvhTriangleMeshShape::buildOptimizedBvh()
 	m_ownsBvh = true;
 }
 
+static bool btAdjustInternalEdgeContactsCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0, int partId0, int index0, const btCollisionObjectWrapper* colObj1, int partId1, int index1)
+{
+	btAdjustInternalEdgeContacts(cp, colObj1, colObj0, partId1, index1);
+	return true;
+}
+
 void btBvhTriangleMeshShape::generateInternalEdgeInfo(btTriangleInfoMap* triangleInfoMap){
 	btGenerateInternalEdgeInfo(this, triangleInfoMap);
 
