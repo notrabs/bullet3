@@ -18,6 +18,7 @@ subject to the following restrictions:
 #include "BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h"
 #include "BulletCollision/CollisionShapes/btOptimizedBvh.h"
 #include "BulletCollision/CollisionDispatch/btInternalEdgeUtility.h"
+#include "BulletCollision/CollisionDispatch/btManifoldResult.h"
 #include "LinearMath/btSerializer.h"
 
 ///Bvh Concave triangle mesh is a static-triangle mesh shape with Bounding Volume Hierarchy optimization.
@@ -355,6 +356,8 @@ void btBvhTriangleMeshShape::buildOptimizedBvh()
 
 void btBvhTriangleMeshShape::generateInternalEdgeInfo(btTriangleInfoMap* triangleInfoMap){
 	btGenerateInternalEdgeInfo(this, triangleInfoMap);
+
+	gContactAddedCallback = btAdjustInternalEdgeContactsCallback;
 }
 
 void btBvhTriangleMeshShape::setOptimizedBvh(btOptimizedBvh* bvh, const btVector3& scaling)
